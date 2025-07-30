@@ -1,6 +1,7 @@
 name: Build Termux APK
 
 on:
+  workflow_dispatch:      # هذا يسمح بتشغيله يدويًا من واجهة GitHub
   push:
     branches:
       - main
