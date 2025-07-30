@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termux Web Terminal</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-terminal"></i>
+                    <h1>Termux Web</h1>
+                </div>
+                <nav class="nav">
+                    <a href="#terminal" class="nav-link active">Terminal</a>
+                    <a href="#packages" class="nav-link">Packages</a>
+                    <a href="#settings" class="nav-link">Settings</a>
+                    <a href="#about" class="nav-link">About</a>
+                </nav>
+                <div class="header-actions">
+                    <button class="btn btn-secondary" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="btn btn-primary" id="newSession">
+                        <i class="fas fa-plus"></i>
+                        New Session
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Terminal Section -->
+            <section id="terminal" class="section active">
+                <div class="terminal-container">
+                    <div class="terminal-header">
+                        <div class="terminal-tabs">
+                            <div class="tab active" data-session="1">
+                                <span>Session 1</span>
+                                <button class="tab-close">×</button>
+                            </div>
+                        </div>
+                        <div class="terminal-controls">
+                            <button class="control-btn" id="clearTerminal">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                            <button class="control-btn" id="copyOutput">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                            <button class="control-btn" id="fullscreen">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="terminal-body">
+                        <div id="terminal-output" class="terminal-output">
+                            <div class="welcome-message">
+                                <div class="ascii-art">
+                                    <pre>
+████████╗███████╗██████╗ ███╗   ███╗██╗   ██╗██╗  ██╗
+╚══██╔══╝██╔════╝██╔══██╗████╗ ████║██║   ██║╚██╗██╔╝
+   ██║   █████╗  ██████╔╝██╔████╔██║██║   ██║ ╚███╔╝ 
+   ██║   ██╔══╝  ██╔══██╗██║╚██╔╝██║██║   ██║ ██╔██╗ 
+   ██║   ███████╗██║  ██║██║ ╚═╝ ██║╚██████╔╝██╔╝ ██╗
+   ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═╝
+                                    </pre>
+                                </div>
+                                <p>Welcome to Termux Web Terminal</p>
+                                <p>Type 'help' to see available commands</p>
+                                <div class="prompt-line">
+                                    <span class="prompt">$ </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="terminal-input-container">
+                            <span class="prompt">$ </span>
+                            <input type="text" id="terminal-input" class="terminal-input" placeholder="Enter command..." autocomplete="off" spellcheck="false">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Packages Section -->
+            <section id="packages" class="section">
+                <div class="packages-container">
+                    <div class="section-header">
+                        <h2>Package Manager</h2>
+                        <div class="search-container">
+                            <input type="text" id="package-search" placeholder="Search packages...">
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </div>
+                    <div class="packages-grid">
+                        <div class="package-card">
+                            <div class="package-icon">
+                                <i class="fab fa-python"></i>
+                            </div>
+                            <div class="package-info">
+                                <h3>Python</h3>
+                                <p>Python programming language</p>
+                                <span class="package-status installed">Installed</span>
+                            </div>
+                            <button class="btn btn-secondary">Remove</button>
+                        </div>
+                        <div class="package-card">
+                            <div class="package-icon">
+                                <i class="fab fa-node-js"></i>
+                            </div>
+                            <div class="package-info">
+                                <h3>Node.js</h3>
+                                <p>JavaScript runtime environment</p>
+                                <span class="package-status available">Available</span>
+                            </div>
+                            <button class="btn btn-primary">Install</button>
+                        </div>
+                        <div class="package-card">
+                            <div class="package-icon">
+                                <i class="fab fa-git-alt"></i>
+                            </div>
+                            <div class="package-info">
+                                <h3>Git</h3>
+                                <p>Version control system</p>
+                                <span class="package-status installed">Installed</span>
+                            </div>
+                            <button class="btn btn-secondary">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings" class="section">
+                <div class="settings-container">
+                    <h2>Settings</h2>
+                    <div class="settings-grid">
+                        <div class="setting-group">
+                            <h3>Appearance</h3>
+                            <div class="setting-item">
+                                <label>Theme</label>
+                                <select id="theme-select">
+                                    <option value="dark">Dark</option>
+                                    <option value="light">Light</option>
+                                    <option value="auto">Auto</option>
+                                </select>
+                            </div>
+                            <div class="setting-item">
+                                <label>Font Size</label>
+                                <input type="range" id="font-size" min="12" max="24" value="14">
+                                <span id="font-size-value">14px</span>
+                            </div>
+                        </div>
+                        <div class="setting-group">
+                            <h3>Terminal</h3>
+                            <div class="setting-item">
+                                <label>Cursor Style</label>
+                                <select id="cursor-style">
+                                    <option value="block">Block</option>
+                                    <option value="underline">Underline</option>
+                                    <option value="bar">Bar</option>
+                                </select>
+                            </div>
+                            <div class="setting-item">
+                                <label>Bell Sound</label>
+                                <input type="checkbox" id="bell-sound" checked>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section id="about" class="section">
+                <div class="about-container">
+                    <h2>About Termux Web</h2>
+                    <div class="about-content">
+                        <p>Termux Web is a browser-based terminal emulator inspired by the popular Termux Android application. It provides a Linux-like command-line environment that runs entirely in your web browser.</p>
+                        
+                        <h3>Features</h3>
+                        <ul>
+                            <li>Full terminal emulation with command history</li>
+                            <li>Package management system</li>
+                            <li>Multiple terminal sessions</li>
+                            <li>Customizable themes and settings</li>
+                            <li>File system operations</li>
+                        </ul>
+
+                        <h3>Built With</h3>
+                        <div class="tech-stack">
+                            <span class="tech-badge">HTML5</span>
+                            <span class="tech-badge">CSS3</span>
+                            <span class="tech-badge">JavaScript</span>
+                            <span class="tech-badge">Web APIs</span>
+                        </div>
+
+                        <div class="links">
+                            <a href="https://github.com/m7md8889/android-terminal" class="btn btn-primary">
+                                <i class="fab fa-github"></i>
+                                View on GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
