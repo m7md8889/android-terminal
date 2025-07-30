@@ -1,10 +1,7 @@
 name: Build Termux APK
 
 on:
-  workflow_dispatch:      # هذا يسمح بتشغيله يدويًا من واجهة GitHub
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   build:
@@ -27,7 +24,7 @@ jobs:
       run: ./gradlew assembleDebug
 
     - name: Upload APK artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: termux-apk
         path: app/build/outputs/apk/debug/app-debug.apk
